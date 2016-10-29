@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <!-- META SECTION -->
+    <title>TITLE</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon"/>
+    <!-- END META SECTION -->
+
+    <!-- CSS INCLUDE -->
+    <link rel="stylesheet" type="text/css" id="theme" href="/css/theme-default.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstraptable/bootstrap-table.css}"
+          href="/assets/bootstrap_table/bootstrap-table.css"/>
+    <!-- EOF CSS INCLUDE -->
+    <!-- START SCRIPTS -->
+
+    <!-- START PLUGINS -->
+    <script type="text/javascript" src="/js/plugins/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/plugins/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js/plugins/bootstrap/bootstrap.min.js"></script>
+    <!-- END PLUGINS -->
+    <script type="text/javascript" th:src="@{/js/plugins/bootstraptable/bootstrap-table.min.js}"></script>
+
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='/js/plugins/icheck/icheck.min.js'></script>
+    <script type="text/javascript" src="/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+
+    <script type="text/javascript" src="/js/plugins/bootstrap/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="/js/plugins/bootstrap/bootstrap-timepicker.min.js"></script>
+    <script type="text/javascript" src="/js/plugins/bootstrap/bootstrap-colorpicker.js"></script>
+    <script type="text/javascript" src="/js/plugins/bootstrap/bootstrap-file-input.js"></script>
+    <script type="text/javascript" src="/js/plugins/bootstrap/bootstrap-select.js"></script>
+    <script type="text/javascript" src="/js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
+    <!-- END THIS PAGE PLUGINS -->
+    <script type="text/javascript" src="/js/plugins.js"></script>
+    <script type="text/javascript" src="/js/actions.js"></script>
+    <!-- END SCRIPTS -->
+</head>
+<body>
+<div class="page-container">
+    <div class="page-content">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Select Table</h3>
+            </div>
+            <div class="panel-body">
+                <!-- START CHECKBOXES RADIO AND SELECT -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="block">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label">Table Name</label>
+                                    <div class="col-md-2">
+                                        <select class="form-control select" data-live-search="true"
+                                                data-style="btn-info" id="tableName" name="tableName">
+                                            <option th:each="choice : ${tables}"
+                                                    th:value="${choice.tablesInTest}"
+                                                    th:text="${choice.tableNameUpCase}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a class="btn btn-primary" onclick="retrieve()"><i
+                                                class="fa fa-search"></i> 查询
+                                        </a>
+                                        <a class="btn btn-primary" href="/home/form"><i
+                                                class="fa fa-edit"></i> 编辑
+                                        </a>
+                                        <button class="btn btn-primary"><i class="fa fa-gears"></i> 生成代码</button>
+                                        <button class="btn btn-default" id="pc_refresh">Refresh</button>
+                                    </div>
+                                </div>
+                                <br/>
+                                <hr/>
+                                <table id="table"
+                                       data-classes="table  table-hover table-no-bordered table-responsable"
+                                       data-toggle="table"
+                                       data-query-params="queryParams"
+                                       data-url="/fields"
+                                       data-side-pagination="server"
+                                       data-pagination="true"
+                                       data-page-list="[10]"
+                                       data-sort-name="tableName"
+                                       data-sort-order="desc">
+                                    <thead>
+                                    <tr>
+                                        <th data-field="state" data-checkbox="true"></th>
+                                        <th data-field="id">id</th>
+                                        <th data-field="fieldUpCase">FieldUpCase</th>
+                                        <th data-field="fieldName">FieldName</th>
+                                        <th data-field="fieldType" >FieldType</th>
+                                        <th data-field="fieldKey">fieldKey</th>
+                                        <th data-field="fieldNull">fieldNull</th>
+                                        <th data-field="comment">comment</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<script type="text/javascript">
+    var $table = $('#table');
+    $("#pc_refresh").click(function () {
+        function p_refresh_shown() {
+            //alert("shown");
+            //panel_refresh($("#pc_refresh").parents(".panel"),"hidden",function(){alert("hidden")});
+        }
+
+        panel_refresh($("#pc_refresh").parents(".panel"), "shown", p_refresh_shown);
+
+    });
+    function stateFormatter(value, row, index) {
+        if (index === 2) {
+            return {
+                disabled: true
+            };
+        }
+        if (index === 5) {
+            return {
+                disabled: true,
+                checked: true
+            }
+        }
+        return value;
+    }
+
+    $('#tableName').selectpicker();
+
+    function queryParams(params) {
+        params["tableName"] = $('#tableName').val();
+        return params;
+    }
+
+    function retrieve() {
+        $table.bootstrapTable("refresh");
+    }
+    
+</script>
+</body>
+</html>

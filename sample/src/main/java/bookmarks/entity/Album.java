@@ -1,0 +1,77 @@
+package bookmarks.entity;
+import javax.persistence.*;
+import java.util.Date;
+
+
+@Entity
+@Table(name = "album")
+public class Album {
+
+private Long id;
+private String albumName;
+private String author;
+private Long classifyId;
+private Date createTime;
+private String descripe;
+private String imgPath;
+private Date publishDate;
+
+    @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  public Long getId() {
+return id;
+}
+
+public void setId(Long id) {
+this.id = id;
+}
+  public String getAlbumName() {
+return albumName;
+}
+
+public void setAlbumName(String albumName) {
+this.albumName = albumName;
+}
+  public String getAuthor() {
+return author;
+}
+
+public void setAuthor(String author) {
+this.author = author;
+}
+  public Long getClassifyId() {
+return classifyId;
+}
+
+public void setClassifyId(Long classifyId) {
+this.classifyId = classifyId;
+}
+  public Date getCreateTime() {
+return createTime;
+}
+
+public void setCreateTime(Date createTime) {
+this.createTime = createTime;
+}
+  public String getDescripe() {
+return descripe;
+}
+
+public void setDescripe(String descripe) {
+this.descripe = descripe;
+}
+  public String getImgPath() {
+return imgPath;
+}
+
+public void setImgPath(String imgPath) {
+this.imgPath = imgPath;
+}
+  public Date getPublishDate() {
+return publishDate;
+}
+
+public void setPublishDate(Date publishDate) {
+this.publishDate = publishDate;
+}
+}

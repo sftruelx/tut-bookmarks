@@ -1,0 +1,18 @@
+#parse ("vm/macro.vm")
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <title> Create</title>
+</head>
+<body>
+<h1 layout:fragment="header">${table.tableNameUpCase} : Create</h1>
+<div layout:fragment="content" class="container">
+    <form id="${table.tableName}Form" th:action="@{/${table.tableName}(form)}" th:object="${${table.tableName}}"
+          action="#" method="post">
+      #generateLabelAndInput(${table.tableName} $fields "add")
+    </form>
+</div>
+</body>
+</html>

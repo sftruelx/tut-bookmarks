@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot and Thymeleaf example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h3>Spring Boot and Thymeleaf</h3>
+<p>Hello World!</p>
+<div th:text="${postLink.href}"></div>
+<ul>
+    <li th:each="t : ${lists}">
+<!--        <div th:each="link :${t.links}">
+            <div th:text="${link.href}"></div>
+            <div th:text="${link.href}"></div>
+            <div th:text="${link.href}"></div>
+        </div>-->
+        <a href="#"
+           th:text="${t.id} + ' ' + ${t.uri} + ' plays ' + ${t.description}"/>
+    </li>
+</ul>
+</body>
+</html>

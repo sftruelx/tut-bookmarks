@@ -1,0 +1,37 @@
+application:
+    message: hello
+    home-page: /index
+
+
+spring:
+    datasource:
+        test-on-borrow: true
+        validationQuery: SELECT 1
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/lxtest?useUnicode=true&characterEncoding=UTF-8
+        password: root
+        username: root
+    mvc:
+        favicon:
+            enabled: false
+    main:
+        banner-mode: off
+    jpa:
+        hibernate:
+            ddl-auto: update
+            generate-ddl: false
+            database-platform: org.hibernate.dialect.MySQLDialect
+
+#            naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy
+        properties:
+            hibernate.globally_quoted_identifiers: true
+            hibernate.show_sql: true
+            hibernate.format_sql: true
+
+    thymeleaf:
+            mode: HTML5
+            encoding: UTF-8
+            content-type: text/html
+            cache: false
+#            prefix: /templates/
+#            suffix: .html

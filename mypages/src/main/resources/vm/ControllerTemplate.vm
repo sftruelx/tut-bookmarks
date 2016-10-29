@@ -1,0 +1,80 @@
+#parse ("vm/macro.vm")
+package com.example.velocity.controller;
+
+import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.example.velocity.entity.${table.tableNameUpCase};
+import com.example.velocity.repository.${table.tableNameUpCase}Repository;
+
+@Controller
+@RequestMapping("/${table.tableName}")
+public class ${table.tableNameUpCase}Controller {
+
+private static final Logger logger = LoggerFactory
+.getLogger(${table.tableNameUpCase}Controller.class);
+
+private final ${table.tableNameUpCase}Repository ${table.tableName}Repository;
+
+public ${table.tableNameUpCase}Controller(${table.tableNameUpCase}Repository ${table.tableName}Repository) {
+this.${table.tableName}Repository = ${table.tableName}Repository;
+}
+
+@GetMapping
+public ModelAndView list() {
+Iterable<${table.tableNameUpCase}> ${table.tableName}s = this.${table.tableName}Repository.findAll();
+return new ModelAndView("${table.tableName}s/list", "${table.tableName}s", ${table.tableName}s);
+}
+
+@GetMapping("{id}")
+public ModelAndView view(@PathVariable("id") ${table.tableNameUpCase} ${table.tableName}) {
+logger.info(${table.tableName}.toString());
+return new ModelAndView("${table.tableName}s/view", "${table.tableName}", ${table.tableName});
+}
+
+@GetMapping(params = "form")
+public String createForm(@ModelAttribute ${table.tableNameUpCase} ${table.tableName}) {
+return "${table.tableName}s/form";
+}
+
+@PostMapping
+public ModelAndView create(@Valid ${table.tableNameUpCase} ${table.tableName}, BindingResult result,
+RedirectAttributes redirect) {
+if (result.hasErrors()) {
+return new ModelAndView("${table.tableName}s/form", "formErrors", result.getAllErrors());
+}
+${table.tableName} = this.${table.tableName}Repository.save(${table.tableName});
+redirect.addFlashAttribute("global${table.tableNameUpCase}", "Successfully created a new ${table.tableName}");
+return new ModelAndView("redirect:/${table.tableName}/{${table.tableName}.id}", "${table.tableName}.id", ${table.tableName}.getId());
+}
+
+@RequestMapping("foo")
+public String foo() {
+throw new RuntimeException("Expected exception in controller");
+}
+
+@GetMapping(value = "delete/{id}")
+public ModelAndView delete(@PathVariable("id") Long id) {
+this.${table.tableName}Repository.delete(id);
+Iterable<${table.tableNameUpCase}> ${table.tableName}s = this.${table.tableName}Repository.findAll();
+return new ModelAndView("${table.tableName}s/list", "${table.tableName}s", ${table.tableName}s);
+}
+
+@GetMapping(value = "modify/{id}")
+public ModelAndView modifyForm(@PathVariable("id") ${table.tableNameUpCase} ${table.tableName}) {
+return new ModelAndView("${table.tableName}s/form", "${table.tableName}", ${table.tableName});
+}
+
+}

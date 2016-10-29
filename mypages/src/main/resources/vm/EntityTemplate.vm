@@ -1,0 +1,28 @@
+#parse ("vm/macro.vm")
+package com.example.velocity.entity;
+import javax.persistence.*;
+import java.util.Date;
+
+
+@Entity
+@Table(name = "${table.tablesInTest}")
+public class ${table.tableNameUpCase} {
+
+#foreach($attr in $fields)
+private $attr.fieldType $attr.field;
+#end
+
+#foreach($attr in $fields)
+  #if($attr.field == "id" )
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  #end
+public $attr.fieldType get${attr.fieldUpCase}() {
+return $attr.field;
+}
+
+public void set${attr.fieldUpCase}(${attr.fieldType} ${attr.field}) {
+this.${attr.field} = ${attr.field};
+}
+#end
+}
