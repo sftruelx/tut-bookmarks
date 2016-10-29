@@ -24,6 +24,7 @@
     <script type="text/javascript" src="/js/plugins/bootstrap/bootstrap.min.js"></script>
     <!-- END PLUGINS -->
     <script type="text/javascript" th:src="@{/js/plugins/bootstraptable/bootstrap-table.min.js}"></script>
+    <script type="text/javascript" th:src="@{/css/bootstraptable/locale/bootstrap-table-zh-CN.min.js}"></script>
 
     <!-- THIS PAGE PLUGINS -->
     <script type='text/javascript' src='/js/plugins/icheck/icheck.min.js'></script>
@@ -52,11 +53,10 @@
                 <div id="toolbar">
                     <div class="form-inline" role="form">
                         <div class="form-group">
-                            <span>Offset: </span>
-
-                                <a class="btn btn-primary" onclick="retrieve()"><i
-                                        class="fa fa-search"></i> 查询
-                                </a>
+                            <span>Album Name </span>
+                            <input name="albumName" class="form-control" type="text" placeholder="Search"/>
+                            <button id="ok" type="submit" class="btn btn-primary"><i class="fa fa-search"></i>查找</button>
+                            <a id="edit" onclick="showmodal()"  class="btn btn-primary"><i class="fa fa-edit"></i>编辑</a>
 
                         </div>
                     </div>
@@ -85,14 +85,53 @@
                     </tr>
                     </thead>
                 </table>
+                <button class="btn btn-primary" type="button">点击我</button>
+                <!-- MODALS -->
+                <div class="modal" id="mymodal" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title" id="defModalHead">Basic Modal</h4>
+                            </div>
+                            <div class="modal-body">
+                                Some content in modal example
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
     </div>
 
 </div>
+
+
 <script type="text/javascript">
-    var $table = $('#table');
+
+
+    var $table = $('#table'),
+            $ok = $('#ok');
+
+    function showmodal() {
+        $("#mymodal").modal({
+            remote: "/test",
+            show: true,
+        });
+
+
+    }
+    $(function () {
+        $ok.click(function () {
+            $table.bootstrapTable('refresh');
+        });
+    });
+
     $("#pc_refresh").click(function () {
         function p_refresh_shown() {
             //alert("shown");
@@ -118,8 +157,11 @@
     }
 
 
-    function queryParams(params) {
-        //params["tableName"] = $('#tableName').val();
+    function queryParams() {
+        var params = {};
+        $('#toolbar').find('input[name]').each(function () {
+            params[$(this).attr('name')] = $(this).val();
+        });
         return params;
     }
 
