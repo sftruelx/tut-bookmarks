@@ -3,13 +3,6 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 <head>
     <link rel="stylesheet" type="text/css" id="theme" href="/css/theme-default.css"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrapdatepicker/css/bootstrap-datetimepicker.css}"
-          href="/assets/bootstrap_table/bootstrap-table.css"/>
-    <script type="text/javascript" src="/js/plugins/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/plugins/jquery/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js/plugins/bootstrap/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/js/plugins/bootstrapdatepicker/js/bootstrap-datetimepicker.js"></script>
-
 </head>
 <body>
 <div class="modal-header">
@@ -62,6 +55,14 @@
         <button class="btn btn-primary" type="submit">Submit</button>
     </div>
 </form>
+<script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>
+<!-- END PLUGINS -->
+
+<!-- THIS PAGE PLUGINS -->
+<script type="text/javascript" src="/js/plugins/bootstrap/bootstrap-datepicker.js"></script>
+<!-- END PAGE PLUGINS -->
 <script type="text/javascript">
     //('#createTime').datetimepicker();
 
