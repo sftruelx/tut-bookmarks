@@ -15,6 +15,9 @@
     <link rel="stylesheet" type="text/css" id="theme" href="/css/theme-default.css"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstraptable/bootstrap-table.css}"
           href="/assets/bootstrap_table/bootstrap-table.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrapdatepicker/css/bootstrap-datetimepicker.css}"
+          href="/assets/bootstrap_table/bootstrap-table.css"/>
+
     <!-- EOF CSS INCLUDE -->
     <!-- START SCRIPTS -->
 
@@ -32,6 +35,7 @@
 
     <script type='text/javascript' src='js/plugins/jquery-validation/jquery.validate.js'></script>
     <script type="text/javascript" src="/js/plugins/bootstrap/bootstrap-datepicker.js"></script>
+
     <script type="text/javascript" src="/js/plugins/bootstrap/bootstrap-timepicker.min.js"></script>
     <script type="text/javascript" src="/js/plugins/bootstrap/bootstrap-colorpicker.js"></script>
     <script type="text/javascript" src="/js/plugins/bootstrap/bootstrap-file-input.js"></script>
@@ -125,7 +129,7 @@
 
         });
         $("#mymodal").modal({
-            remote: "/test",
+            remote: "/blank",
             show: true,
         });
 

@@ -35,7 +35,15 @@ public class WelcomeController {
 		return "redirect:/index";
 	}
 
+	@RequestMapping(value = "/datepicker")
+	public String datepicker(){
+		return "datepicker";
+	}
 
+	@RequestMapping(value = "/blank")
+	public String blank(){
+		return "blank";
+	}
 
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
