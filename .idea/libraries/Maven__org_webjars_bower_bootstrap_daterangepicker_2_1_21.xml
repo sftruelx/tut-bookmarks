@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.webjars.bower:bootstrap-daterangepicker:2.1.21">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/webjars/bower/bootstrap-daterangepicker/2.1.21/bootstrap-daterangepicker-2.1.21.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/webjars/bower/bootstrap-daterangepicker/2.1.21/bootstrap-daterangepicker-2.1.21-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/webjars/bower/bootstrap-daterangepicker/2.1.21/bootstrap-daterangepicker-2.1.21-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

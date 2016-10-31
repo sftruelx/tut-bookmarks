@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <!-- META SECTION -->
+    <title>TITLE</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+    <!-- END META SECTION -->
+
+    <!-- CSS INCLUDE -->
+    <link rel="stylesheet" type="text/css" id="theme" href="/css/theme-default.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstraptable/bootstrap-table.css}" href="/assets/bootstrap_table/bootstrap-table.css"/>
+    <!-- EOF CSS INCLUDE -->
+    <!-- START SCRIPTS -->
+
+    <!-- START SCRIPTS -->
+    <!-- START PLUGINS -->
+    <script type="text/javascript" src="/js/plugins/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/plugins/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js/plugins/bootstrap/bootstrap.min.js"></script>
+    <!-- END PLUGINS -->
+
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='/js/plugins/icheck/icheck.min.js'></script>
+    <script type="text/javascript" src="/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+
+    <script type="text/javascript" src="/js/plugins/bootstrap/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="/js/plugins/bootstrap/bootstrap-timepicker.min.js"></script>
+    <script type="text/javascript" src="/js/plugins/bootstrap/bootstrap-colorpicker.js"></script>
+    <script type="text/javascript" src="/js/plugins/bootstrap/bootstrap-file-input.js"></script>
+    <script type="text/javascript" src="/js/plugins/bootstrap/bootstrap-select.js"></script>
+    <script type="text/javascript" src="/js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
+
+    <script type="text/javascript" th:src="@{/js/plugins/bootstraptable/bootstrap-table.min.js}"></script>
+    <script type="text/javascript" th:src="@{/css/bootstraptable/locale/bootstrap-table-zh-CN.min.js}"></script>
+    <script type='text/javascript' src='/js/plugins/jquery-validation/jquery.validate.js'></script>
+    <script type='text/javascript' src='/js/plugins/noty/jquery.noty.js'></script>
+    <script type='text/javascript' src='/js/plugins/maskedinput/jquery.maskedinput.min.js'></script>
+    <!--<script type='text/javascript' src='/js/plugins/noty/layouts/topCenter.js'></script>-->
+    <!--<script type='text/javascript' src='/js/plugins/noty/layouts/topLeft.js'></script>-->
+    <script type='text/javascript' src='/js/plugins/noty/layouts/topRight.js'></script>
+
+    <script type='text/javascript' src='/js/plugins/noty/themes/default.js'></script>
+
+    <audio id="audio-alert" src="/audio/alert.mp3" preload="auto"></audio>
+    <audio id="audio-fail" src="/audio/fail.mp3" preload="auto"></audio>
+    <!--<script type="text/javascript" src="/js/settings.js"></script>-->
+
+    <!-- END THIS PAGE PLUGINS -->
+
+    <!-- END SCRIPTS -->
+</head>
+<body>
+<!-- START PAGE CONTAINER -->
+
+
+ <div layout:fragment="content"></div>
+
+<!-- END PRELOADS -->
+
+
+<script type="text/javascript" src="js/plugins.js"></script>
+<script type="text/javascript" src="js/actions.js"></script>
+
+
+</body>
+</html>

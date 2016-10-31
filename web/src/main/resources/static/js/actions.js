@@ -218,7 +218,7 @@ $(document).ready(function(){
         
     });
     /* EOF ACCORDION */
-    
+
     /* DATATABLES/CONTENT HEIGHT FIX */
     $(".dataTables_length select").on("change",function(){
         onresize();

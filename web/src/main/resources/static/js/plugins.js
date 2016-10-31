@@ -1,13 +1,13 @@
 $(function() {
 
-    var formElements = function(){                
+    /*var formElements = function(){
         // Bootstrap datepicker
-        var feDatepicker = function(){                        
-            if($(".datepicker").length > 0){
-                $(".datepicker").datepicker({format: 'yyyy-mm-dd'});                
-                $("#dp-2,#dp-3,#dp-4").datepicker(); // Sample
-            }           
-            
+        var feDatepicker = function(){
+            // if($(".datepicker").length > 0){
+            //     $(".datepicker").datepicker({format: 'yyyy-mm-dd'});
+            //     $("#dp-2,#dp-3,#dp-4").datepicker(); // Sample
+            // }
+
         }// END Bootstrap datepicker
         
         //Bootstrap timepicker
@@ -146,23 +146,23 @@ $(function() {
         
         return {// Init all form element features
 		init: function(){                    
-                    feDatepicker();                    
-                    feTimepicker();
-                    feColorpicker();
-                    feSelect();
-                    feValidation();
-                    feMasked();
-                    feTooltips();
-                    fePopover();
-                    feTagsinput();
-                    feiCheckbox();
-                    feBsFileInput();
-                    feDaterangepicker();
+                    // feDatepicker();
+                    // feTimepicker();
+                    // feColorpicker();
+                    // feSelect();
+                    // feValidation();
+                    // feMasked();
+                    // feTooltips();
+                    // fePopover();
+                    // feTagsinput();
+                    // feiCheckbox();
+                    // feBsFileInput();
+                    // feDaterangepicker();
                 }
         }
-    }();
+    }();*/
 
-    var uiElements = function(){
+    /*var uiElements = function(){
 
         //Datatables
         var uiDatatable = function(){
@@ -348,7 +348,7 @@ $(function() {
         
         // Summernote 
         var uiSummernote = function(){
-            /* Extended summernote editor */
+            /!* Extended summernote editor *!/
             if($(".summernote").length > 0){
                 $(".summernote").summernote({height: 250,
                                              codemirror: {
@@ -359,9 +359,9 @@ $(function() {
                                               }
                 });
             }
-            /* END Extended summernote editor */
+            /!* END Extended summernote editor *!/
             
-            /* Lite summernote editor */
+            /!* Lite summernote editor *!/
             if($(".summernote_lite").length > 0){
                 
                 $(".summernote_lite").on("focus",function(){
@@ -374,9 +374,9 @@ $(function() {
                                                      });
                 });                
             }
-            /* END Lite summernote editor */
+            /!* END Lite summernote editor *!/
             
-            /* Email summernote editor */
+            /!* Email summernote editor *!/
             if($(".summernote_email").length > 0){
                                                     
                 $(".summernote_email").summernote({height: 400, focus: true,
@@ -391,7 +391,7 @@ $(function() {
                                                  });
                 
             }
-            /* END Email summernote editor */
+            /!* END Email summernote editor *!/
             
         }// END Summernote 
         
@@ -432,9 +432,9 @@ $(function() {
             }
         }
         
-    }();
+    }();*/
 
-    var templatePlugins = function(){
+   /* var templatePlugins = function(){
         
         var tp_clock = function(){
             
@@ -483,12 +483,12 @@ $(function() {
                 tp_date();
             }
         }
-    }();
+    }();*/
     
-    var fullCalendar = function(){
+    /*var fullCalendar = function(){
             
         var calendar = function(){
-            
+            /!*
             if($("#calendar").length > 0){
                 
                 function prepare_external_list(){
@@ -567,7 +567,7 @@ $(function() {
                     }
                 });
                 
-            }            
+            }         *!/
         }
         
         return {
@@ -575,19 +575,19 @@ $(function() {
                 calendar();
             }
         }
-    }();
+    }();*/
     
-    formElements.init();
-    uiElements.init();
-    templatePlugins.init();    
-    
-    fullCalendar.init();
+    // formElements.init();
+    // uiElements.init();
+    // templatePlugins.init();
+    //
+    // fullCalendar.init();
     
     /* My Custom Progressbar */
     $.mpb = function(action,options){
 
         var settings = $.extend({
-            state: '',            
+            state: '',
             value: [0,0],
             position: '',
             speed: 20,

@@ -2,7 +2,7 @@
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 <head>
-    <link rel="stylesheet" type="text/css" id="theme" href="/css/theme-default.css"/>
+
 </head>
 <body>
 <div class="modal-header">
@@ -31,14 +31,20 @@
         <div class="form-group">
             <label class="col-md-3 control-label">ClassifyId</label>
             <div class="col-md-7">
-                <input id="classifyId" name="classifyId" type="text" class="form-control"/>
+                <select class="form-control select" data-live-search="true" id="classifyId" name="classifyId">
+                    <option>Lorem ipsum dolor</option>
+                    <option>Sit amet sicors</option>
+                    <option>Mostoly stofu tiro</option>
+                    <option>Vico sante fara</option>
+                    <option>Delomo ponto si</option>
+                </select>
                 <span class="help-block">Required</span>
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-3 control-label">CreateTime</label>
             <div class="col-md-7">
-                <input type="text" id="createTime" name="createTime" class="form-control datepicker" />
+                <input type="text" class="form-control datepicker"  id="createTime" name="createTime"/>
             </div>
         </div>
 
@@ -53,21 +59,18 @@
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
         <button class="btn btn-primary" type="submit">Submit</button>
+        <a class="btn btn-success" onClick="noty({text: 'Successful action', layout: 'topRight', type: 'success'});">Success</a>
     </div>
 </form>
-<script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
-<script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>
-<!-- END PLUGINS -->
 
-<!-- THIS PAGE PLUGINS -->
-<script type="text/javascript" src="/js/plugins/bootstrap/bootstrap-datepicker.js"></script>
+
 <!-- END PAGE PLUGINS -->
 <script type="text/javascript">
-    //('#createTime').datetimepicker();
 
     $(function () {
 
+        $("#classifyId").selectpicker();
+        $('#createTime').datepicker({format: 'yyyy-mm-dd'});
         var validate = $("#validate").validate({
             debug: true, //调试模式取消submit的默认提交功能
             //errorClass: "label.error", //默认为错误的样式类为：error
@@ -77,13 +80,25 @@
                 alert("ok");
             },
             rules: {
-                firstname: {
+                albumName: {
+                    required: true
+                },
+                author: {
+                    required: true
+                },
+                classifyId: {
+                    required: true
+                },
+                createTime: {
+                    required: true
+                },
+                descripe: {
                     required: true
                 }
 
             },
             messages: {
-                firstname: {
+                albumName: {
                     required: "原始密码不能为空",
                 }
             }
@@ -92,5 +107,8 @@
     })
 
 </script>
+
+<script type="text/javascript" src="/js/plugins.js"></script>
+<script type="text/javascript" src="/js/actions.js"></script>
 </body>
 </html>

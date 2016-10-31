@@ -54,7 +54,7 @@ public class Album {
     public void setClassifyId(Long classifyId) {
         this.classifyId = classifyId;
     }
-//    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     public Date getCreateTime() {
         return createTime;
