@@ -44,7 +44,7 @@
                         <tr>
                             <th data-field="state" data-checkbox="true"></th>
                             <th data-field="id">id</th>
-                            <th data-field="albumName">AlbumName</th>
+                            <th data-field="albumName" data-formatter="urlFormatter">AlbumName</th>
                             <th data-field="author">Author</th>
                             <th data-field="classifyId">ClassifyId</th>
                             <th data-field="createTime">CreateTime</th>
@@ -87,10 +87,10 @@
     var $table = $('#table'),
             $ok = $('#ok');
 
-    function showmodal() {
+    function showmodal(id) {
 
         editDialog.modal({
-            remote: "/album/1" ,
+            remote: "/album/" + id ,
             show: true, backdrop: false
         });
 //            editDialog.modal({
@@ -142,8 +142,8 @@
         return params;
     }
 
-    function retrieve() {
-        $table.bootstrapTable("refresh");
+    function urlFormatter(value, row) {
+        return '<a href="#" onclick=" showmodal('+ row.id +')" >'+ value +'</a>';
     }
 
 

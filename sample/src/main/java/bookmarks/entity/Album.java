@@ -54,8 +54,8 @@ public class Album {
     public void setClassifyId(Long classifyId) {
         this.classifyId = classifyId;
     }
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd")
     public Date getCreateTime() {
         return createTime;
     }
@@ -79,7 +79,7 @@ public class Album {
     public void setImgPath(String imgPath) {
         this.imgPath = imgPath;
     }
-//    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     @JsonFormat(pattern="yyyy-MM-dd")
     public Date getPublishDate() {
         return publishDate;
