@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.hibernate.validator.internal.util.CollectionHelper.newArrayList;
@@ -74,17 +74,24 @@ public class AlbumController {
         return result;
     }
 
-    @ResponseBody
+/*    @ResponseBody
     @GetMapping("{id}")
     public Album view(@PathVariable("id") Album album) {
         logger.info(album.toString());
         return album;
+    }*/
+
+    @GetMapping("{id}")
+    public String view(@PathVariable Long id,Model model) {
+        Album album = albumRepository.findOne(id);
+        model.addAttribute("album", album);
+        return "album/one";
     }
 
     @GetMapping(params = "show")
     public ModelAndView createForm(@ModelAttribute Album album) {
         Iterable<Album> albums = this.albumRepository.findAll();
-        return new ModelAndView("album/list", "albums", albums);
+        return new ModelAndView("album/list", "model", albums);
     }
 
     @ResponseBody
