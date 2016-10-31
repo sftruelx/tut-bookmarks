@@ -45,7 +45,6 @@ public class WelcomeController {
 		return "blank";
 	}
 
-
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Map<String, Object> model, String error ) {
 		model.put("error",error);

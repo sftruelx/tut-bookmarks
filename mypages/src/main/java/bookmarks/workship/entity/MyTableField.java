@@ -33,6 +33,7 @@ public class MyTableField {
     private String fieldClass;
     private Boolean ifSearch;
     private Set<MyValidate> validates = new HashSet<MyValidate>();
+    private MyDataSet dataSet;
     private String dataSource;
 
     @Id
@@ -155,5 +156,22 @@ public class MyTableField {
 
     public void setDataSource(String dataSource) {
         this.dataSource = dataSource;
+    }
+
+    public Boolean getList() {
+        return isList;
+    }
+
+    public void setList(Boolean list) {
+        isList = list;
+    }
+    @OneToOne
+    @JoinColumn(name = "dataSet_id", insertable = true, unique = true)
+    public MyDataSet getDataSet() {
+        return dataSet;
+    }
+
+    public void setDataSet(MyDataSet dataSet) {
+        this.dataSet = dataSet;
     }
 }
