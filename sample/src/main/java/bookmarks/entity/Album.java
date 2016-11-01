@@ -14,7 +14,7 @@ public class Album {
     private Long id;
     private String albumName;
     private String author;
-    private Long classifyId;
+    private Teammate teammate;
     private Date createTime;
     private String descripe;
     private String imgPath;
@@ -46,14 +46,18 @@ public class Album {
     public void setAuthor(String author) {
         this.author = author;
     }
-
-    public Long getClassifyId() {
-        return classifyId;
+    @OneToOne
+    @JoinColumn(name = "classifyId", insertable = true, unique = true)
+    public Teammate getTeammate() {
+        return teammate;
     }
 
-    public void setClassifyId(Long classifyId) {
-        this.classifyId = classifyId;
+    public void setTeammate(Teammate teammate) {
+        this.teammate = teammate;
     }
+
+
+
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @JsonFormat(pattern="yyyy-MM-dd")
     public Date getCreateTime() {

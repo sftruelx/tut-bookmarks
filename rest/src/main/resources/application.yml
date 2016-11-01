@@ -5,12 +5,13 @@ application:
 spring:
     velocity:
       enabled: false
+
     datasource:
         test-on-borrow: true
         validationQuery: SELECT 1
         driverClassName: com.mysql.jdbc.Driver
         url: jdbc:mysql://localhost:3306/lxtest?useUnicode=true&characterEncoding=UTF-8
-        password: 111111
+        password: root
         username: root
     mvc:
         favicon:
@@ -30,8 +31,7 @@ spring:
             hibernate.format_sql: true
 
     thymeleaf:
-            mode: HTML5
+            mode: LEGACYHTML5
             encoding: UTF-8
             content-type: text/html
             cache: false
-

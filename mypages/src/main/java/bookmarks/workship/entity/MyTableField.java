@@ -166,7 +166,7 @@ public class MyTableField {
         isList = list;
     }
     @OneToOne
-    @JoinColumn(name = "dataSet_id", insertable = true, unique = true)
+    @JoinColumn(name = "dataSetId", insertable = true, unique = true)
     public MyDataSet getDataSet() {
         return dataSet;
     }

@@ -6,54 +6,71 @@
 
     <!-- END SCRIPTS -->
 </head>
-<body>
+<body  style="background: '#f5f5f5' ">
 <div layout:fragment="content">
-    <div class="container">
+    <div class="container" style="margin-top: 20px;margin-bottom: 300px;">
+
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Select Table</h3>
+
                 </div>
+
                 <div class="panel-body">
                     <!-- START CHECKBOXES RADIO AND SELECT -->
                     <div id="toolbar">
                         <div class="form-inline" role="form">
                             <div class="form-group">
                                 <span>Album Name </span>
-
                                 <input name="albumName" class="form-control" type="text" placeholder="Search"/>
                                 <button id="ok" type="submit" class="btn btn-primary"><i class="fa fa-search"></i>查找
                                 </button>
-                                <a id="edit" onclick="showmodal()" class="btn btn-primary"><i class="fa fa-edit"></i>编辑</a>
-
+                                <a id="pc_refresh"  class="btn btn-primary"><i class="fa fa-edit"></i>test</a>
                             </div>
                         </div>
                     </div>
-                    <table id="table"
-                           data-classes="table  table-hover table-no-bordered table-responsable"
-                           data-toggle="table"
-                           data-toolbar="#toolbar"
-                           data-query-params="queryParams"
-                           data-url="/album"
-                           data-side-pagination="server"
-                           data-pagination="true"
-                           data-page-list="[10]"
-                           data-sort-name="AlbumName"
-                           data-sort-order="desc">
+
+                        <table id="table"
+                               data-classes="table  table-no-bordered  table-hover"
+                               data-toggle="table"
+
+                               data-toolbar="#toolbar"
+                               data-show-toggle="true"
+                               data-query-params="queryParams"
+                               data-show-columns="true"
+                               data-show-refresh="true"
+                               data-url="/album"
+                               data-side-pagination="server"
+                               data-pagination="true"
+                               data-page-list="[5, 10, 20]"
+                               data-sort-name="AlbumName"
+                               data-sort-order="desc">
                         <thead>
                         <tr>
                             <th data-field="state" data-checkbox="true"></th>
-                            <th data-field="id">id</th>
-                            <th data-field="albumName" data-formatter="urlFormatter">AlbumName</th>
-                            <th data-field="author">Author</th>
-                            <th data-field="classifyId">ClassifyId</th>
-                            <th data-field="createTime">CreateTime</th>
-                            <th data-field="descripe">Descripe</th>
+                            <th data-field="id" data-sortable="true">id</th>
+                            <th data-field="albumName" data-formatter="urlFormatter" data-sortable="true">AlbumName</th>
+                            <th data-field="author" data-sortable="true">Author</th>
+                            <th data-field="teammate.firstName" data-sortable="true">ClassifyId</th>
+                            <th data-field="createTime" data-sortable="true">CreateTime</th>
+                            <th data-field="descripe" data-sortable="true">Descripe</th>
                             <th data-field="publishDate">PublishDate</th>
                         </tr>
                         </thead>
                     </table>
 
-
+<!--                    <table id="example" class="table  table-no-bordered  table-hover " cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>albumName</th>
+                            <th>author</th>
+                            <th>ClassifyId</th>
+                            <th>CreateTime</th>
+                            <th>Descripe</th>
+                        </tr>
+                        </thead>
+                    </table>-->
+                    //修改了bootstrap Table js的1396行代码。
                 </div>
             </div>
 
@@ -104,6 +121,43 @@
         $ok.click(function () {
             $table.bootstrapTable('refresh');
         });
+
+     /*   table = $('#example').DataTable( {
+            "order": [[ 3, "desc" ]],
+            "pagingType": "simple_numbers",//设置分页控件的模式
+            searching: false,//屏蔽datatales的查询框
+            "bLengthChange": true,
+            "iDisplayLength": 10,//每页显示10条数据
+            aLengthMenu:[10,20],//设置一页展示10条记录
+            "bLengthChange": false,//屏蔽tables的一页展示多少条记录的下拉列表
+            "oLanguage": {  //对表格国际化
+                "sLengthMenu": "每页显示 _MENU_条",
+                "sZeroRecords": "没有找到符合条件的数据",
+                //  "sProcessing": "&lt;img src=’./loading.gif’ /&gt;",
+                "sInfo": "显示第 _START_ 到第 _END_ 条记录,　共计 _TOTAL_ 条记录",
+                "sInfoEmpty": "没有记录",
+                "sInfoFiltered": "",
+                "sSearch": "搜索：",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "前一页",
+                    "sNext": "后一页",
+                    "sLast": "尾页"
+
+                }
+            },
+            "processing": true, //打开数据加载时的等待效果
+            "serverSide": true,//打开后台分页
+            "sAjaxSource": "/album?list",
+            "columns": [
+                { "data": "albumName" },
+                { "data": "author" },
+                { "data": "classifyId" },
+                { "data": "createTime" },
+                { "data": "descripe" },
+            ]
+
+        } );*/
     });
 
     $("#pc_refresh").click(function () {
@@ -115,6 +169,7 @@
         panel_refresh($("#pc_refresh").parents(".panel"), "shown", p_refresh_shown);
 
     });
+/* 样例
     function stateFormatter(value, row, index) {
         if (index === 2) {
             return {
@@ -129,17 +184,18 @@
         }
         return value;
     }
+*/
 
 
-    function queryParams() {
-        var params = {};
+    function queryParams(params) {
         $('#toolbar').find('input[name]').each(function () {
+            if($(this).val() != '')
             params[$(this).attr('name')] = $(this).val();
         });
         return params;
     }
 
-    function urlFormatter(value, row) {
+    function urlFormatter(value, row, index) {
         return '<a href="#" onclick=" showmodal('+ row.id +')" >'+ value +'</a>';
     }
 

@@ -53,23 +53,23 @@ public class App3Controller {
 //            StringWriter stringWriter = new StringWriter();
 //            template.merge(ctx, stringWriter);
 //            System.out.println(stringWriter.toString());
-            String rootPath = "C:\\Users\\Larry\\Desktop\\demo\\multiboot3\\src\\main";
-            File dir = new File("C:\\Users\\Larry\\Desktop\\demo\\multiboot3\\src\\main\\java\\com\\example\\velocity\\controller");
+            String rootPath = "d:\\src\\main";
+            File dir = new File("d:\\src\\main\\java\\com\\example\\velocity\\controller");
             if(!dir.exists()){
                     dir.mkdirs();
             }
-            File dir1 = new File("C:\\Users\\Larry\\Desktop\\demo\\multiboot3\\src\\main\\java\\com\\example\\velocity\\entity");
+            File dir1 = new File("d:\\src\\main\\java\\com\\example\\velocity\\entity");
             if(!dir1.exists()){
                 dir1.mkdirs();
             }
-            File dir2 = new File("C:\\Users\\Larry\\Desktop\\demo\\multiboot3\\src\\main\\java\\com\\example\\velocity\\repository");
+            File dir2 = new File("d:\\src\\main\\java\\com\\example\\velocity\\repository");
             if(!dir2.exists()){
                 dir2.mkdirs();
             }
             merge(controllerTpt,ctx,rootPath+"/java/com/example/velocity/controller/"+ table.getTableNameUpCase() +"Controller.java");
             merge(entityTpt,ctx,rootPath+"/java/com/example/velocity/entity/"+ table.getTableNameUpCase() +".java");
             merge(repositoryTpt,ctx,rootPath+"/java/com/example/velocity/repository/"+ table.getTableNameUpCase() +"Repository.java");
-            merge(addTpt,ctx,rootPath+"/resources/templates3/"+ table.getTableNameUpCase()+".html");
+//            merge(addTpt,ctx,rootPath+"/resources/templates3/"+ table.getTableNameUpCase()+".html");
             System.out.println("success...");
         }
         return "OK";
