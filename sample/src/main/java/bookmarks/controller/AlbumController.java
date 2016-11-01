@@ -1,10 +1,10 @@
 package bookmarks.controller;
 
 
-import bookmarks.datatable.DataTableQueryObject;
-import bookmarks.datatable.DataTableReturnObject;
 import bookmarks.bootstraptable.Paginator;
 import bookmarks.bootstraptable.PaginatorResult;
+import bookmarks.datatable.DataTableQueryObject;
+import bookmarks.datatable.DataTableReturnObject;
 import bookmarks.entity.Album;
 import bookmarks.entity.Teammate;
 import bookmarks.repository.AlbumRepository;
@@ -20,16 +20,13 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import javax.validation.Valid;
 import java.util.List;
 
 import static org.hibernate.validator.internal.util.CollectionHelper.newArrayList;
@@ -38,21 +35,15 @@ import static org.hibernate.validator.internal.util.CollectionHelper.newArrayLis
 @RequestMapping("/album")
 public class AlbumController {
 
+    private static final Logger logger = LoggerFactory.getLogger(AlbumController.class);
+
     @Autowired
     TeammateRepository teammateRepository;
 
-    @RequestMapping(value = "show")
-    public ModelAndView show() {
-        Iterable<Album> albums = this.albumRepository.findAll();
-        return new ModelAndView("album/list", "albums", albums);
-    }
-
-
-    private static final Logger logger = LoggerFactory
-            .getLogger(AlbumController.class);
 
     private final AlbumRepository albumRepository;
 
+    @Autowired
     public AlbumController(AlbumRepository albumRepository) {
         this.albumRepository = albumRepository;
     }
@@ -96,7 +87,7 @@ public class AlbumController {
     public DataTableReturnObject list2(DataTableQueryObject dtquery) {
         DataTableReturnObject dt = new DataTableReturnObject();
 
-        Pageable pageable = new PageRequest(dtquery.getiDisplayStart()/dtquery.getiDisplayLength(), dtquery.getiDisplayLength(), new Sort(Sort.Direction.ASC, new String[]{"albumName"}));
+        Pageable pageable = new PageRequest(dtquery.getiDisplayStart() / dtquery.getiDisplayLength(), dtquery.getiDisplayLength(), new Sort(Sort.Direction.ASC, new String[]{"albumName"}));
         Page<Album> fields = this.albumRepository.findAll(pageable);
         dt.setAaData(fields.getContent());
         dt.setiTotalDisplayRecords(fields.getTotalElements());
@@ -132,30 +123,16 @@ public class AlbumController {
 
     @ResponseBody
     @PostMapping
-    public Album create(@Valid Album album, BindingResult result,
-                        RedirectAttributes redirect) {
-      /*  if (result.hasErrors()) {
-            return new ModelAndView("albums/form", "formErrors", result.getAllErrors());
-        }*/
+    public Album create(Album album) {
         album = this.albumRepository.save(album);
         return album;
     }
 
-    @RequestMapping("foo")
-    public String foo() {
-        throw new RuntimeException("Expected exception in controller");
+    @DeleteMapping
+    public Album delete(Album album) {
+        this.albumRepository.delete(album.getId());
+        return album;
     }
 
 
-    @GetMapping(value = "delete/{id}")
-    public ModelAndView delete(@PathVariable("id") Long id) {
-        this.albumRepository.delete(id);
-        Iterable<Album> albums = this.albumRepository.findAll();
-        return new ModelAndView("albums/list", "albums", albums);
-    }
-
-    @GetMapping(value = "modify/{id}")
-    public ModelAndView modifyForm(@PathVariable("id") Album album) {
-        return new ModelAndView("albums/form", "album", album);
-    }
 }
