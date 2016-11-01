@@ -26,6 +26,7 @@
                                 <button id="ok" type="submit" class="btn btn-primary"><i class="fa fa-search"></i>查找
                                 </button>
                                 <a id="pc_refresh"  class="btn btn-primary"><i class="fa fa-edit"></i>test</a>
+                                <a id="remove"  class="btn btn-primary"><i class="glyphicon glyphicon-remove"></i>删除</a>
                             </div>
                         </div>
                     </div>
@@ -48,7 +49,7 @@
                             <th data-field="id" data-sortable="true">id</th>
                             <th data-field="albumName" data-formatter="urlFormatter" data-sortable="true">AlbumName</th>
                             <th data-field="author" data-sortable="true">Author</th>
-                            <th data-field="teammate.firstName" data-sortable="true">ClassifyId</th>
+                            <th data-field="teammate.firstName" data-sortable="true" data-formatter="showFormatter">ClassifyId</th>
                             <th data-field="createTime" data-sortable="true">CreateTime</th>
                             <th data-field="descripe" data-sortable="true">Descripe</th>
                             <th data-field="publishDate">PublishDate</th>
@@ -157,6 +158,22 @@
         } );*/
     });
 
+    $('#remove').click(function () {
+        alert('getSelections: ' + JSON.stringify($table.bootstrapTable('getSelections')));
+        $.ajax({
+            url: '/album',
+            type: 'delete',
+            data : {id:1},
+            dataType: 'json',
+            success: function (data) {
+
+
+            }, error: function (jqXHR, textStatus, errorThrown) {
+                console.log("error");
+            },
+        });
+    })
+
     $("#pc_refresh").click(function () {
         function p_refresh_shown() {
             //alert("shown");
@@ -196,7 +213,9 @@
         return '<a href="#" onclick=" showmodal('+ row.id +')" >'+ value +'</a>';
     }
 
-
+    function showFormatter(value, row, index) {
+        return row.teammate.firstName + ' ' + row.teammate.lastName;
+    }
 
     /*]]>*/</script>
 

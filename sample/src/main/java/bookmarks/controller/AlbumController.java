@@ -129,9 +129,9 @@ public class AlbumController {
     }
 
     @DeleteMapping
-    public Album delete(Album album) {
-        this.albumRepository.delete(album.getId());
-        return album;
+    public Album delete(Long id) {
+//        this.albumRepository.delete(album[0].getId());
+        return new Album();
     }
 
 
