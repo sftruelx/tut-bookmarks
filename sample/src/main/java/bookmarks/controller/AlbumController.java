@@ -6,7 +6,10 @@ import bookmarks.bootstraptable.PaginatorResult;
 import bookmarks.datatable.DataTableQueryObject;
 import bookmarks.datatable.DataTableReturnObject;
 import bookmarks.entity.Album;
+import bookmarks.entity.ReturnMessage;
 import bookmarks.entity.Teammate;
+import bookmarks.entity.dto.AlbumDto;
+import bookmarks.entity.dto.DeleteIds;
 import bookmarks.repository.AlbumRepository;
 import bookmarks.repository.TeammateRepository;
 import org.slf4j.Logger;
@@ -27,6 +30,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.Collections;
 import java.util.List;
 
 import static org.hibernate.validator.internal.util.CollectionHelper.newArrayList;
@@ -128,10 +132,19 @@ public class AlbumController {
         return album;
     }
 
-    @DeleteMapping
-    public Album delete(Long id) {
-//        this.albumRepository.delete(album[0].getId());
-        return new Album();
+
+
+    @ResponseBody
+    @RequestMapping(value = "/delete")
+    public ReturnMessage delete(@RequestBody AlbumDto dto) {
+        Album[] albums = dto.getAlbums();
+        List<Album> list = newArrayList();
+        for(Album a : albums){
+            a.setEnabled(0);
+            list.add(a);
+        }
+        this.albumRepository.save(list);
+        return new ReturnMessage(1,"OK");
     }
 
 
