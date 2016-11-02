@@ -6,76 +6,82 @@
 
     <!-- END SCRIPTS -->
 </head>
-<body  style="background: '#f5f5f5' ">
+<body style="background: #f8f8f8 ">
 <div layout:fragment="content">
-    <div class="container" style="margin-top: 20px;margin-bottom: 300px;">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Album</h3>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Select Table</h3>
-
-                </div>
-
-                <div class="panel-body">
-                    <!-- START CHECKBOXES RADIO AND SELECT -->
-                    <div id="toolbar">
-                        <div class="form-inline" role="form">
-                            <div class="form-group">
-                                <span>Album Name </span>
-                                <input name="albumName" class="form-control" type="text" placeholder="Search"/>
-                                <button id="ok" type="submit" class="btn btn-primary"><i class="fa fa-search"></i>查找
-                                </button>
-                                <a id="pc_refresh"  class="btn btn-primary"><i class="fa fa-edit"></i>test</a>
-                                <a id="remove"  class="btn btn-primary"><i class="glyphicon glyphicon-remove"></i>删除</a>
-                            </div>
-                        </div>
-                    </div>
-
-                        <table id="table"
-                               data-classes="table  table-no-bordered  table-hover"
-                               data-toggle="table"
-
-                               data-toolbar="#toolbar"
-                               data-query-params="queryParams"
-                               data-url="/album"
-                               data-side-pagination="server"
-                               data-pagination="true"
-                               data-page-list="[5, 10, 20]"
-                               data-sort-name="AlbumName"
-                               data-sort-order="desc">
-                        <thead>
-                        <tr>
-                            <th data-field="state" data-checkbox="true"></th>
-                            <th data-field="id" data-sortable="true">id</th>
-                            <th data-field="albumName" data-formatter="urlFormatter" data-sortable="true">AlbumName</th>
-                            <th data-field="author" data-sortable="true">Author</th>
-                            <th data-field="teammate.firstName" data-sortable="true" data-formatter="showFormatter">ClassifyId</th>
-                            <th data-field="createTime" data-sortable="true">CreateTime</th>
-                            <th data-field="descripe" data-sortable="true">Descripe</th>
-                            <th data-field="publishDate">PublishDate</th>
-                        </tr>
-                        </thead>
-                    </table>
-
-<!--                    <table id="example" class="table  table-no-bordered  table-hover " cellspacing="0" width="100%">
-                        <thead>
-                        <tr>
-                            <th>albumName</th>
-                            <th>author</th>
-                            <th>ClassifyId</th>
-                            <th>CreateTime</th>
-                            <th>Descripe</th>
-                        </tr>
-                        </thead>
-                    </table>-->
-              <!--      //修改了bootstrap Table js的1396行代码。-->
-                </div>
             </div>
 
-    </div>
+            <div class="panel-body">
+                <!-- START CHECKBOXES RADIO AND SELECT -->
+
+                <div id="toolbar">
+                    <div class="form-inline" role="form">
+                        <div class="row">
+                            <input name="albumName" class="form-control" type="text" placeholder="Album Name"/>
+
+                        </div>
+                        <div class="form-group">
+                            <a id="add" class="btn  btn-primary" onclick="showmodal()"><i class="fa fa-file-text-o"></i>新增</a>
+                            <button id="ok" type="submit" class="btn  btn-primary">
+                                <i class="fa fa-search"></i>查找
+                            </button>
+                            <a id="remove" class="btn  btn-primary"><i class="glyphicon glyphicon-minus"></i>删除</a>
+                            <a id="rollback" class="btn  btn-primary"><i class="fa fa-undo"></i>撤销</a>
+                            <a id="pc_refresh" class="btn  btn-primary"><i class="fa fa-edit"></i>test</a>
+
+                            <a href="#" id="modal_link" class="btn btn-primary"> Open Modal Dialog </a>
+                        </div>
+                    </div>
+                </div>
+                <table id="table"
+                       data-classes="table  table-no-bordered  table-hover table-forum"
+                       data-toggle="table"
+
+                       data-toolbar="#toolbar"
+                       data-query-params="queryParams"
+                       data-url="/album"
+                       data-side-pagination="server"
+                       data-pagination="true"
+                       data-page-list="[5, 10, 20]"
+                       data-sort-name="AlbumName"
+                       data-sort-order="desc">
+                    <thead>
+                    <tr>
+                        <th data-field="state" data-checkbox="true"></th>
+                        <th data-field="id" data-sortable="true">id</th>
+                        <th data-field="albumName" data-formatter="urlFormatter" data-sortable="true">名称</th>
+                        <th data-field="author" data-sortable="true">作者</th>
+                        <th data-field="teammate.firstName" data-sortable="true" data-formatter="showFormatter">
+                            类型
+                        </th>
+                        <th data-field="createTime" data-sortable="true">出版时间</th>
+                        <th data-field="descripe" data-sortable="true">说明</th>
+                        <th data-field="publishDate">PublishDate</th>
+                    </tr>
+                    </thead>
+                </table>
+
+                <!--                    <table id="example" class="table  table-no-bordered  table-hover " cellspacing="0" width="100%">
+                                        <thead>
+                                        <tr>
+                                            <th>albumName</th>
+                                            <th>author</th>
+                                            <th>ClassifyId</th>
+                                            <th>CreateTime</th>
+                                            <th>Descripe</th>
+                                        </tr>
+                                        </thead>
+                                    </table>-->
+                <!--      //修改了bootstrap Table js的1396行代码。-->
+            </div>
+        </div>
 
 
-    <!-- MODALS -->
+
+    <!-- Add Edit MODALS -->
     <div class="modal" id="mymodal" role="dialog" aria-labelledby="defModalHead" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -93,6 +99,11 @@
             </div>
         </div>
     </div>
+
+    <div id="dialog-message" title="Empty the recycle bin?">
+        <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>These items will be permanently deleted and cannot be recovered. <br/><br/><br/><br/>Are you sure?</p>
+    </div>
+
     <script th:inline="javascript">/*<![CDATA[*/
     var editDialog;
 
@@ -100,15 +111,16 @@
             $ok = $('#ok');
 
     function showmodal(id) {
-
+        var url = '';
+        if(id == null){
+            url = '/album?add';
+        }else{
+            url= '/album/' + id;
+        }
         editDialog.modal({
-            remote: "/album/" + id ,
+            remote: url,
             show: true, backdrop: false
         });
-//            editDialog.modal({
-//                remote: "/test" + id + '&t=' + Math.random(1000),
-//                show: true, backdrop: false
-//            });
 
     }
     $(function () {
@@ -119,45 +131,67 @@
         $ok.click(function () {
             $table.bootstrapTable('refresh');
         });
-
-     /*   table = $('#example').DataTable( {
-            "order": [[ 3, "desc" ]],
-            "pagingType": "simple_numbers",//设置分页控件的模式
-            searching: false,//屏蔽datatales的查询框
-            "bLengthChange": true,
-            "iDisplayLength": 10,//每页显示10条数据
-            aLengthMenu:[10,20],//设置一页展示10条记录
-            "bLengthChange": false,//屏蔽tables的一页展示多少条记录的下拉列表
-            "oLanguage": {  //对表格国际化
-                "sLengthMenu": "每页显示 _MENU_条",
-                "sZeroRecords": "没有找到符合条件的数据",
-                //  "sProcessing": "&lt;img src=’./loading.gif’ /&gt;",
-                "sInfo": "显示第 _START_ 到第 _END_ 条记录,　共计 _TOTAL_ 条记录",
-                "sInfoEmpty": "没有记录",
-                "sInfoFiltered": "",
-                "sSearch": "搜索：",
-                "oPaginate": {
-                    "sFirst": "首页",
-                    "sPrevious": "前一页",
-                    "sNext": "后一页",
-                    "sLast": "尾页"
-
+        $('#modal_link').click(function() {
+            $('#dialog-message').dialog('open');
+            return false;
+        });
+        $('#dialog-message').dialog({
+            autoOpen : false,
+            width : 600,
+            resizable : false,
+            modal : true,
+            title : " Empty the recycle bin?",
+            buttons : [{
+                html : "<i class='fa fa-trash-o'></i>&nbsp; Delete all items",
+                "class" : "btn btn-danger",
+                click : function() {
+                    $(this).dialog("close");
                 }
-            },
-            "processing": true, //打开数据加载时的等待效果
-            "serverSide": true,//打开后台分页
-            "sAjaxSource": "/album?list",
-            "columns": [
-                { "data": "albumName" },
-                { "data": "author" },
-                { "data": "classifyId" },
-                { "data": "createTime" },
-                { "data": "descripe" },
-            ]
+            }, {
+                html : "<i class='fa fa-times'></i>&nbsp; Cancel",
+                "class" : "btn btn-default",
+                click : function() {
+                    $(this).dialog("close");
+                }
+            }]
+        });
+        /*   table = $('#example').DataTable( {
+         "order": [[ 3, "desc" ]],
+         "pagingType": "simple_numbers",//设置分页控件的模式
+         searching: false,//屏蔽datatales的查询框
+         "bLengthChange": true,
+         "iDisplayLength": 10,//每页显示10条数据
+         aLengthMenu:[10,20],//设置一页展示10条记录
+         "bLengthChange": false,//屏蔽tables的一页展示多少条记录的下拉列表
+         "oLanguage": {  //对表格国际化
+         "sLengthMenu": "每页显示 _MENU_条",
+         "sZeroRecords": "没有找到符合条件的数据",
+         //  "sProcessing": "&lt;img src=’./loading.gif’ /&gt;",
+         "sInfo": "显示第 _START_ 到第 _END_ 条记录,　共计 _TOTAL_ 条记录",
+         "sInfoEmpty": "没有记录",
+         "sInfoFiltered": "",
+         "sSearch": "搜索：",
+         "oPaginate": {
+         "sFirst": "首页",
+         "sPrevious": "前一页",
+         "sNext": "后一页",
+         "sLast": "尾页"
 
-        } );*/
+         }
+         },
+         "processing": true, //打开数据加载时的等待效果
+         "serverSide": true,//打开后台分页
+         "sAjaxSource": "/album?list",
+         "columns": [
+         { "data": "albumName" },
+         { "data": "author" },
+         { "data": "classifyId" },
+         { "data": "createTime" },
+         { "data": "descripe" },
+         ]
+
+         } );*/
     });
-
 
 
     $("#pc_refresh").click(function () {
@@ -169,14 +203,14 @@
         panel_refresh($("#pc_refresh").parents(".panel"), "shown", p_refresh_shown);
 
     });
-    
+
     $('#remove').click(function () {
 
         $.ajax({
             url: '/album/delete',
             dataType: 'json',
             type: 'put',
-            data: '{"albums" :'+ JSON.stringify($table.bootstrapTable('getSelections'))+'}',
+            data: '{"albums" :' + JSON.stringify($table.bootstrapTable('getSelections')) + '}',
             contentType: 'application/json;charset=UTF-8',
             success: function (data, textStatus) {
                 $table.bootstrapTable('refresh');
@@ -188,40 +222,40 @@
 
         });
     })
-/* 样例
-    function stateFormatter(value, row, index) {
-        if (index === 2) {
-            return {
-                disabled: true
-            };
-        }
-        if (index === 5) {
-            return {
-                disabled: true,
-                checked: true
-            }
-        }
-        return value;
-    }
-*/
+    /* 样例
+     function stateFormatter(value, row, index) {
+     if (index === 2) {
+     return {
+     disabled: true
+     };
+     }
+     if (index === 5) {
+     return {
+     disabled: true,
+     checked: true
+     }
+     }
+     return value;
+     }
+     */
 
 
     function queryParams(params) {
         $('#toolbar').find('input[name]').each(function () {
-            if($(this).val() != '')
-            params[$(this).attr('name')] = $(this).val();
+            if ($(this).val() != '')
+                params[$(this).attr('name')] = $(this).val();
         });
         return params;
     }
 
     function urlFormatter(value, row, index) {
-        return '<a href="#" onclick=" showmodal('+ row.id +')" >'+ value +'</a>';
+        return '<a href="#" onclick=" showmodal(' + row.id + ')" >' + value + '</a>';
     }
 
     function showFormatter(value, row, index) {
-        if(row.teammate != null) {
+        if (row.teammate != null) {
             return row.teammate.firstName + ' ' + row.teammate.lastName;
-        }else{
+        } else {
             return '';
         }
     }

@@ -9,7 +9,6 @@ import bookmarks.entity.Album;
 import bookmarks.entity.ReturnMessage;
 import bookmarks.entity.Teammate;
 import bookmarks.entity.dto.AlbumDto;
-import bookmarks.entity.dto.DeleteIds;
 import bookmarks.repository.AlbumRepository;
 import bookmarks.repository.TeammateRepository;
 import org.slf4j.Logger;
@@ -30,7 +29,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.Collections;
 import java.util.List;
 
 import static org.hibernate.validator.internal.util.CollectionHelper.newArrayList;
@@ -108,8 +106,17 @@ public class AlbumController {
     }*/
 
     @GetMapping("{id}")
-    public String view(@PathVariable Long id, Model model) {
+    public String editForm(@PathVariable Long id, Model model) {
         Album album = albumRepository.findOne(id);
+        model.addAttribute("album", album);
+        Iterable<Teammate> teammates = teammateRepository.findAll();
+        model.addAttribute("teammates", teammates);
+        return "album/one";
+    }
+
+    @GetMapping(params = "add")
+    public String addForm(Model model) {
+        Album album = new Album();
         model.addAttribute("album", album);
         Iterable<Teammate> teammates = teammateRepository.findAll();
         model.addAttribute("teammates", teammates);
