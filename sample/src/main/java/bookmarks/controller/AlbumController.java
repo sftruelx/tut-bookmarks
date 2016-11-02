@@ -139,8 +139,6 @@ public class AlbumController {
         return album;
     }
 
-
-
     @ResponseBody
     @RequestMapping(value = "/delete")
     public ReturnMessage delete(@RequestBody AlbumDto dto) {

@@ -31,8 +31,6 @@
                             <a id="remove" class="btn  btn-primary"><i class="glyphicon glyphicon-minus"></i>删除</a>
                             <a id="rollback" class="btn  btn-primary"><i class="fa fa-undo"></i>撤销</a>
                             <a id="pc_refresh" class="btn  btn-primary"><i class="fa fa-edit"></i>test</a>
-
-                            <a href="#" id="modal_link" class="btn btn-primary"> Open Modal Dialog </a>
                         </div>
                     </div>
                 </div>
@@ -100,8 +98,8 @@
         </div>
     </div>
 
-    <div id="dialog-message" title="Empty the recycle bin?">
-        <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>These items will be permanently deleted and cannot be recovered. <br/><br/><br/><br/>Are you sure?</p>
+    <div id="dialog-message" title="删除">
+        <p><h3><span class="ui-icon ui-icon-alert"></span>确定要删除所选记录？</h3></p>
     </div>
 
     <script th:inline="javascript">/*<![CDATA[*/
@@ -131,8 +129,11 @@
         $ok.click(function () {
             $table.bootstrapTable('refresh');
         });
-        $('#modal_link').click(function() {
+        $('#remove').click(function() {
+            list = $table.bootstrapTable('getSelections');
+            if (list.length > 0) {
             $('#dialog-message').dialog('open');
+        }
             return false;
         });
         $('#dialog-message').dialog({
@@ -140,57 +141,23 @@
             width : 600,
             resizable : false,
             modal : true,
-            title : " Empty the recycle bin?",
+            title : " 删除",
             buttons : [{
-                html : "<i class='fa fa-trash-o'></i>&nbsp; Delete all items",
+                html : "<i class='fa fa-trash-o'></i>&nbsp; 删除",
                 "class" : "btn btn-danger",
                 click : function() {
+                    remove();
                     $(this).dialog("close");
                 }
             }, {
-                html : "<i class='fa fa-times'></i>&nbsp; Cancel",
+                html : "<i class='fa fa-times'></i>&nbsp; 取消",
                 "class" : "btn btn-default",
                 click : function() {
                     $(this).dialog("close");
                 }
             }]
         });
-        /*   table = $('#example').DataTable( {
-         "order": [[ 3, "desc" ]],
-         "pagingType": "simple_numbers",//设置分页控件的模式
-         searching: false,//屏蔽datatales的查询框
-         "bLengthChange": true,
-         "iDisplayLength": 10,//每页显示10条数据
-         aLengthMenu:[10,20],//设置一页展示10条记录
-         "bLengthChange": false,//屏蔽tables的一页展示多少条记录的下拉列表
-         "oLanguage": {  //对表格国际化
-         "sLengthMenu": "每页显示 _MENU_条",
-         "sZeroRecords": "没有找到符合条件的数据",
-         //  "sProcessing": "&lt;img src=’./loading.gif’ /&gt;",
-         "sInfo": "显示第 _START_ 到第 _END_ 条记录,　共计 _TOTAL_ 条记录",
-         "sInfoEmpty": "没有记录",
-         "sInfoFiltered": "",
-         "sSearch": "搜索：",
-         "oPaginate": {
-         "sFirst": "首页",
-         "sPrevious": "前一页",
-         "sNext": "后一页",
-         "sLast": "尾页"
 
-         }
-         },
-         "processing": true, //打开数据加载时的等待效果
-         "serverSide": true,//打开后台分页
-         "sAjaxSource": "/album?list",
-         "columns": [
-         { "data": "albumName" },
-         { "data": "author" },
-         { "data": "classifyId" },
-         { "data": "createTime" },
-         { "data": "descripe" },
-         ]
-
-         } );*/
     });
 
 
@@ -204,7 +171,9 @@
 
     });
 
-    $('#remove').click(function () {
+    function remove() {
+
+
 
         $.ajax({
             url: '/album/delete',
@@ -221,7 +190,7 @@
             },
 
         });
-    })
+    }
     /* 样例
      function stateFormatter(value, row, index) {
      if (index === 2) {
