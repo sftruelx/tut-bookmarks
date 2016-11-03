@@ -11,6 +11,7 @@ import bookmarks.entity.Teammate;
 import bookmarks.entity.dto.AlbumDto;
 import bookmarks.repository.AlbumRepository;
 import bookmarks.repository.TeammateRepository;
+import bookmarks.repository.specs.AlbumSpecs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,7 @@ public class AlbumController {
     @Autowired
     TeammateRepository teammateRepository;
 
-
-    private final AlbumRepository albumRepository;
+    private AlbumRepository albumRepository;
 
     @Autowired
     public AlbumController(AlbumRepository albumRepository) {
@@ -59,7 +59,7 @@ public class AlbumController {
         Pageable pageable = new PageRequest(paginator.getOffset() /
                 paginator.getLimit(), paginator.getLimit(), sort);
 //        Page<Album> fields = this.albumRepository.findAll(pageable);
-        Page<Album> fields = this.albumRepository.findAll(AlbumFormCondition(album), pageable);
+        Page<Album> fields = albumRepository.findAll(AlbumFormCondition(album), pageable);
         PaginatorResult result = new PaginatorResult(fields.getContent(), fields.getTotalElements());
         return result;
     }

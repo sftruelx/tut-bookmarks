@@ -31,14 +31,14 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="model" target="1.8" />
+      <module name="model" target="1.5" />
       <module name="myfreemaker" target="1.8" />
-      <module name="mypages" target="1.8" />
-      <module name="rest" target="1.8" />
-      <module name="sample" target="1.8" />
-      <module name="security" target="1.8" />
-      <module name="tut-bookmarks" target="1.8" />
-      <module name="web" target="1.8" />
+      <module name="mypages" target="1.5" />
+      <module name="rest" target="1.5" />
+      <module name="sample" target="1.5" />
+      <module name="security" target="1.5" />
+      <module name="tut-bookmarks" target="1.5" />
+      <module name="web" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
