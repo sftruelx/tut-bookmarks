@@ -18,19 +18,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import java.util.List;
 
+import static bookmarks.repository.specs.AlbumSpecs.AlbumFormCondition;
 import static org.hibernate.validator.internal.util.CollectionHelper.newArrayList;
 
 @Controller
@@ -64,22 +59,7 @@ public class AlbumController {
         Pageable pageable = new PageRequest(paginator.getOffset() /
                 paginator.getLimit(), paginator.getLimit(), sort);
 //        Page<Album> fields = this.albumRepository.findAll(pageable);
-        Page<Album> fields = this.albumRepository.findAll(new Specification<Album>() {
-            @Override
-            public Predicate toPredicate(Root<Album> root,
-                                         CriteriaQuery<?> q, CriteriaBuilder cb) {
-                List<Predicate> list = newArrayList();
-                Predicate albumName = null;
-                if (!StringUtils.isEmpty(album.getAlbumName())) {
-                    albumName = cb.like(root.get("albumName").as(String.class), "%" + album.getAlbumName() + "%");
-                    list.add(albumName);
-                }
-                Predicate enabled = cb.equal(root.get("enabled").as(Integer.class), 1);
-                list.add(enabled);
-                Predicate[] p = new Predicate[list.size()];
-                return cb.and(list.toArray(p));
-            }
-        }, pageable);
+        Page<Album> fields = this.albumRepository.findAll(AlbumFormCondition(album), pageable);
         PaginatorResult result = new PaginatorResult(fields.getContent(), fields.getTotalElements());
         return result;
     }
