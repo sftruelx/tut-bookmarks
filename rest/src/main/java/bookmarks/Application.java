@@ -2,19 +2,17 @@
 package bookmarks;
 
 
-
-
-
+import bookmarks.specs.CustomRepositoryFactoryBean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.Collection;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
+@EnableJpaRepositories(repositoryFactoryBeanClass = CustomRepositoryFactoryBean.class)
 public class Application {
 
 	/*@Bean

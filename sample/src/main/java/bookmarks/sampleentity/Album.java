@@ -1,10 +1,7 @@
-package bookmarks.entity;
+package bookmarks.sampleentity;
 
+import bookmarks.BaseObject;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -13,23 +10,18 @@ import java.util.Date;
 
 @Entity
 @Table(name="album")
-public class Album {
+public class Album extends BaseObject{
 
     private Long id;
     private String albumName;
     private String author;
     private Teammate teammate;
-//    @CreatedDate
     private Date createTime;
     private String descripe;
     private String imgPath;
     private Integer enabled = 1;
-    private Date publishDate;
 
-//    @CreatedBy
-//
-//    @LastModifiedDate
-//    @LastModifiedBy
+    private Date publishDate;
 
     public Album() {
         super();
@@ -37,9 +29,6 @@ public class Album {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
-
-
     public Long getId() {
         return id;
     }

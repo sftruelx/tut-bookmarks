@@ -5,10 +5,10 @@ import bookmarks.bootstraptable.Paginator;
 import bookmarks.bootstraptable.PaginatorResult;
 import bookmarks.datatable.DataTableQueryObject;
 import bookmarks.datatable.DataTableReturnObject;
-import bookmarks.entity.Album;
-import bookmarks.entity.ReturnMessage;
-import bookmarks.entity.Teammate;
-import bookmarks.entity.dto.AlbumDto;
+import bookmarks.sampleentity.Album;
+import bookmarks.sampleentity.ReturnMessage;
+import bookmarks.sampleentity.Teammate;
+import bookmarks.sampleentity.dto.AlbumDto;
 import bookmarks.repository.AlbumRepository;
 import bookmarks.repository.TeammateRepository;
 import bookmarks.repository.specs.AlbumSpecs;
@@ -26,7 +26,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-import static bookmarks.repository.specs.AlbumSpecs.AlbumFormCondition;
 import static org.hibernate.validator.internal.util.CollectionHelper.newArrayList;
 
 @Controller
@@ -59,7 +58,7 @@ public class AlbumController {
         Pageable pageable = new PageRequest(paginator.getOffset() /
                 paginator.getLimit(), paginator.getLimit(), sort);
 //        Page<Album> fields = this.albumRepository.findAll(pageable);
-        Page<Album> fields = albumRepository.findAll(AlbumFormCondition(album), pageable);
+        Page<Album> fields = albumRepository.findAll(AlbumSpecs.AlbumFormCondition(album), pageable);
         PaginatorResult result = new PaginatorResult(fields.getContent(), fields.getTotalElements());
         return result;
     }

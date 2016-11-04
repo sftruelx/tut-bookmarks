@@ -1,4 +1,4 @@
-package bookmarks.entity;
+package bookmarks.sampleentity;
 import javax.persistence.*;
 
 

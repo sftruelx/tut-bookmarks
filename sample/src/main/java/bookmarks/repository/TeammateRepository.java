@@ -1,6 +1,6 @@
 package bookmarks.repository;
 
-import bookmarks.entity.Teammate;
+import bookmarks.sampleentity.Teammate;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;

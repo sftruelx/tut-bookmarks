@@ -1,10 +1,8 @@
 package bookmarks.specs;
 
-import static com.google.common.collect.Iterables.toArray;
-
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.util.ReflectionUtils;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -14,10 +12,11 @@ import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.Attribute;
 import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.SingularAttribute;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.util.ReflectionUtils;
-import org.springframework.util.StringUtils;
+import static com.google.common.collect.Iterables.toArray;
+
 
 public class CustomerSpecs {
 
@@ -34,7 +33,12 @@ public class CustomerSpecs {
 				EntityType<T> entity = entityManager.getMetamodel().entity(type);//4
 				
 				for (Attribute<T, ?> attr : entity.getDeclaredAttributes()) {//5
-					Object attrValue = getValue(example, attr); //6
+					Object attrValue = null; //6
+					try {
+						attrValue = getValue(example, attr);
+					} catch (NoSuchFieldException e) {
+						e.printStackTrace();
+					}
 					if (attrValue != null) {
 						if (attr.getJavaType() == String.class) { //7
 							if (!StringUtils.isEmpty(attrValue)) { //8
@@ -54,8 +58,8 @@ public class CustomerSpecs {
 			/**
 			 * 12
 			 */
-			private <T> Object getValue(T example, Attribute<T, ?> attr) {
-				return ReflectionUtils.getField((Field) attr.getJavaMember(), example);
+			private <T> Object getValue(T example, Attribute<T, ?> attr) throws NoSuchFieldException {
+				return ReflectionUtils.getField(example.getClass().getDeclaredField(attr.getName()), example);
 			}
 			
 			/**

@@ -1,4 +1,4 @@
-package bookmarks.entity.dto;
+package bookmarks.sampleentity.dto;
 
 /**
  * Created by Larry on 2016/11/1.

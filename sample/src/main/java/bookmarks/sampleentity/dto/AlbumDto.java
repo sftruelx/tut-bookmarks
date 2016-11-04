@@ -1,6 +1,6 @@
-package bookmarks.entity.dto;
+package bookmarks.sampleentity.dto;
 
-import bookmarks.entity.Album;
+import bookmarks.sampleentity.Album;
 
 /**
  * Created by Larry on 2016/11/1.

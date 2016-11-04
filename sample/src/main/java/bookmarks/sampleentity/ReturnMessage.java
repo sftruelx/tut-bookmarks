@@ -1,4 +1,4 @@
-package bookmarks.entity;
+package bookmarks.sampleentity;
 
 /**
  * Created by Larry on 2016/11/1.

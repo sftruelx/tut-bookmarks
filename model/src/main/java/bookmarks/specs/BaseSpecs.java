@@ -1,6 +1,5 @@
 package bookmarks.specs;
 
-import org.hibernate.validator.internal.xml.ObjectFactory;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
@@ -15,6 +14,7 @@ import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.SingularAttribute;
 import java.lang.reflect.Field;
 import java.util.List;
+
 import static com.google.common.collect.Iterables.toArray;
 import static org.hibernate.validator.internal.util.CollectionHelper.newArrayList;
 
@@ -45,8 +45,8 @@ public class BaseSpecs {
                 return predicates.isEmpty() ? criteriaBuilder.conjunction() : criteriaBuilder.and(toArray(predicates, Predicate.class));
             }
 
-            private <T> Object getValue(T sample, Attribute<T, ?> attr) {
-                return ReflectionUtils.getField((Field) attr.getJavaMember(), sample);
+            private <T> Object getValue(T example, Attribute<T, ?> attr) {
+                return ReflectionUtils.getField( (Field) attr.getJavaMember(), example);
             }
 
             private <E, T> SingularAttribute<T, E> attribute(EntityType<T> entityType, String fieldName, Class<E> fieldClass) {

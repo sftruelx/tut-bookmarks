@@ -1,6 +1,6 @@
 package bookmarks.repository.specs;
 
-import bookmarks.entity.Album;
+import bookmarks.sampleentity.Album;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
