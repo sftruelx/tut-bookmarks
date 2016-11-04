@@ -11,7 +11,7 @@ import java.util.Date;
 @Entity
 @Table(name="album")
 public class Album extends BaseObject{
-
+//    @Transient
     private Long id;
     private String albumName;
     private String author;
@@ -22,8 +22,10 @@ public class Album extends BaseObject{
     private Integer enabled = 1;
 
     private Date publishDate;
-    @Version
-    private Long version;
+
+    private Integer version;
+
+
     public Album() {
         super();
     }
@@ -109,12 +111,13 @@ public class Album extends BaseObject{
         this.enabled = enabled;
     }
 
-
-    public Long getVersion() {
+    @Version
+    @Column(name = "version")
+    public Integer getVersion() {
         return version;
     }
 
-    public void setVersion(Long version) {
+    public void setVersion(Integer version) {
         this.version = version;
     }
 }

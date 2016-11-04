@@ -21,6 +21,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -114,7 +115,16 @@ public class AlbumController {
     @ResponseBody
     @PostMapping
     public Album create(Album album) {
-        album = this.albumRepository.save(album);
+        if(StringUtils.isEmpty(album.getId()) ) {
+            album = this.albumRepository.save(album);
+        }else{
+            Album oldAlbum = albumRepository.findOne(album.getId());
+            oldAlbum.setAlbumName(album.getAlbumName());
+            oldAlbum.setAuthor(album.getAuthor());
+            oldAlbum.setDescripe(album.getDescripe());
+            oldAlbum.setTeammate(album.getTeammate());
+            oldAlbum = this.albumRepository.save(oldAlbum);
+        }
         return album;
     }
 
