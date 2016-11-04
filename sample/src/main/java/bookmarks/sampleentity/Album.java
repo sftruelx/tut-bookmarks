@@ -22,7 +22,8 @@ public class Album extends BaseObject{
     private Integer enabled = 1;
 
     private Date publishDate;
-
+    @Version
+    private Long version;
     public Album() {
         super();
     }
@@ -106,5 +107,14 @@ public class Album extends BaseObject{
 
     public void setEnabled(Integer enabled) {
         this.enabled = enabled;
+    }
+
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 }

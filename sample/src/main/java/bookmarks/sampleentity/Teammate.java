@@ -1,10 +1,12 @@
 package bookmarks.sampleentity;
+import bookmarks.BaseObject;
+
 import javax.persistence.*;
 
 
 @Entity
 @Table(name = "teammate")
-public class Teammate {
+public class Teammate extends BaseObject {
 
 private Long id;
 private String firstName;
